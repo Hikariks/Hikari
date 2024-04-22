@@ -3,6 +3,7 @@ import { Title } from '@douyinfe/semi-ui/lib/es/skeleton/item';
 import Text from '@douyinfe/semi-ui/lib/es/typography/text';
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
+import { Image } from '@douyinfe/semi-ui';
 function App() {
   const [accountName, setAccountName] = useState()
   const [accountKey, setAccountKey] = useState()
@@ -21,22 +22,28 @@ function App() {
     check
       .then(statevalue => {
         console.log(statevalue);
-        navigate("./callroll")
+        navigate("/callroll")
         setLoginError("");
       })
       .catch(statevalue => {
         console.log(statevalue);
         setLoginError(statevalue);
-        
       })
   }
 
   useEffect(() => {
     setIsLoginDisabled(!accountName || !accountKey);
   }, [accountName, accountKey]);
+  
+
   return (
     <>
       <Title>欢迎登录教师点名系统</Title>
+      <Image 
+        width={50}
+        height={50}
+        src="//s.moonshotacademy.cn/public/8/b/4de522-1fb5e2-2f1652.600.png"
+      />
       <Input autoFocus placeholder='请输入账户' size='large' value={accountName} onChange={(changeValue) => { setAccountName(changeValue); console.log(accountName) }}></Input>
       <Input placeholder='请输入密码' size='large' value={accountKey} onChange={(changeValue) => { setAccountKey(changeValue); console.log(accountKey); }}></Input>
       {loginError && <Text style={{color: 'red'}}>{loginError}</Text>}
