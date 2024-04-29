@@ -1,0 +1,92 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 170px; 
+  box-sizing: border-box;
+  padding: 8%; 
+  :global {
+      background-color: #F9F9F9;
+      padding: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap:170px
+      }
+  .logo {
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+  }
+  .pic_contain{
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+    min-height: 150px;
+    max-width:500px;
+    max-height:500px;
+    width: 100%; 
+  }
+  .all{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cont_contain {
+    display: flex;
+    flex-direction: column;
+    background: var(--usage-bg---semi-color-bg-0, #FFF);
+    box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.10), 0px 0px 1px 0px rgba(0, 0, 0, 0.30);
+    background-color: #FFFFFF;
+    width: 50%; 
+    padding: 2%; 
+    max-height: 720px;
+    min-height: 600px;
+    max-width: 640px;
+    min-width: 300px;
+
+    .title {
+      display: flex;
+      justify-content: center;
+      flex-wrap: nowrap;
+      color: var(--usage-text---semi-color-text-0, #1C1F23);
+      font-family: "PingFang SC";
+      font-size: 28px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 40px; 
+      background-color: #FFFFFF;
+      margin: 3% auto; 
+      margin-bottom: 32px;
+    }
+
+    .input_acc{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #FFFFFF;      
+      margin-bottom: 30px;
+    }
+
+    .input_key{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #FFFFFF;      
+      margin-bottom: 109px;
+    }
+    .button {
+      display: flex;
+      justify-content: center;
+      background-color: #FFFFFF;
+      margin-bottom: 21px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .note{
+      display: flex;
+      justify-content: center;
+      margin-bottom: 119px;
+  }
+}
+}

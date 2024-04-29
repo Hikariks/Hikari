@@ -1,3 +1,4 @@
+
 import { Button, Input } from '@douyinfe/semi-ui';
 import { Title } from '@douyinfe/semi-ui/lib/es/skeleton/item';
 import Text from '@douyinfe/semi-ui/lib/es/typography/text';
@@ -40,11 +41,12 @@ function App() {
     <>
       <Title>欢迎登录教师点名系统</Title>
       <Image 
-        width={50}
-        height={50}
-        src="//s.moonshotacademy.cn/public/8/b/4de522-1fb5e2-2f1652.600.png"
+        width={100}
+        height={100}
+        src="logo.svg"
       />
-      <Input autoFocus placeholder='请输入账户' size='large' value={accountName} onChange={(changeValue) => { setAccountName(changeValue); console.log(accountName) }}></Input>
+      <Input className='accoount'
+      autoFocus placeholder='请输入账户' size='large' value={accountName} onChange={(changeValue) => { setAccountName(changeValue); console.log(accountName) }}></Input>
       <Input placeholder='请输入密码' size='large' value={accountKey} onChange={(changeValue) => { setAccountKey(changeValue); console.log(accountKey); }}></Input>
       {loginError && <Text style={{color: 'red'}}>{loginError}</Text>}
       <Button
@@ -57,5 +59,3 @@ function App() {
 }
 
 export default App;
-
- 
