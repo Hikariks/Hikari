@@ -1,5 +1,5 @@
 import styles from './index.module.scss'
-import { Button, Input, Typography } from '@douyinfe/semi-ui';
+import { Button, Input} from '@douyinfe/semi-ui';
 import { Title } from '@douyinfe/semi-ui/lib/es/skeleton/item';
 import Text from '@douyinfe/semi-ui/lib/es/typography/text';
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ function App() {
   const [isLoginDisabled, setIsLoginDisabled] = useState(true);
   const [loginError, setLoginError] = useState("");
   const navigate = useNavigate()
+  
   function Login() {
     const state = Math.random();
     const check = new Promise((resolve, reject) => {
@@ -37,7 +38,6 @@ function App() {
     setIsLoginDisabled(!accountName || !accountKey);
   }, [accountName, accountKey]);
   
-
   return  (
     <div className={styles.root}>
       <div className={styles.pic_contain}>

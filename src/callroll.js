@@ -1,27 +1,36 @@
-import { useEffect, useState } from 'react';
+import {useState,useEffect} from 'react';
 import axios from 'axios';
-import { List, Descriptions, Button, Modal,Avatar,Typography} from '@douyinfe/semi-ui';
+import { List, Button, Modal,Avatar,Typography,Spin,Descriptions} from '@douyinfe/semi-ui';
 import {IconIdCard} from '@douyinfe/semi-icons'
+import useSWR from 'swr'
 
 function App() {
-    const [students, setStudents] = useState([]);
     const [selectedStudent, setSelectedStudent] = useState(null); 
     const [visible, setVisible] = useState(false);
     const{Text} = Typography
+    const [calledStudents, setCalledStudents] = useState([]);
+    const { data:students, error, isLoading } = useSWR('http://localhost:3000/students', url => axios.get(url).then(res => res.data))
     useEffect(() => {
-        axios.get('http://localhost:3000/students')
-            .then(response => {
-                setStudents(response.data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }, []);
+        if (students && students.length === calledStudents.length) {
+            setCalledStudents([]);
+
+        }
+    }, [calledStudents, students]);
+    if(isLoading){
+        return <Spin size='large'></Spin>
+    }
+    if(error){
+        return <div>{error.message}</div>
+    }
+    
+
     const showDialog = () => {
-        const randomIndex = Math.floor(Math.random() * students.length);
-        const student = students[randomIndex];
+        const uncalledStudents = students.filter(student => !calledStudents.includes(student.name));
+        const randomIndex = Math.floor(Math.random() * uncalledStudents.length);
+        const student = uncalledStudents[randomIndex];
         setSelectedStudent(student.name);
-        setVisible(true); 
+        setCalledStudents(nowlist => [...nowlist, student.name]);
+        setVisible(true);
     };
     const handleOk = () => {
         setVisible(false);
@@ -30,13 +39,21 @@ function App() {
     const handleCancel = () => {
         setVisible(false);
     };
-
     const style = {
         border: '1px solid var(--semi-color-border)',
         backgroundColor: 'var(--semi-color-bg-2)',
         borderRadius: '3px',
         paddingLeft: '20px',
     };
+    const normalStyle ={
+        color: 'var(--semi-color-text-0)',
+        fontWeight: 500 
+    }
+    const getGray ={
+        color: "gray",
+        fontWeight: 500,
+        
+    }
     return (
         <div>
             <Avatar
@@ -46,14 +63,28 @@ function App() {
         />
             <List
                 grid={{
-                    gutter: 12,
+                    gutter: 20,
                     span: 8,
                 }}
                 dataSource={students}
-                renderItem={item => (
-                    <List.Item style={style}>
+                renderItem={item => {
+                    const isCalled = calledStudents.includes(item.name)
+                    if (item.name==='赵胤轩') {                   
+                        return(<List.Item style={style}>
                         <div>
-                            <h3 style={{ color: 'var(--semi-color-text-0)', fontWeight: 500 }}>{item.name}</h3>
+                            <h3 style={isCalled ? getGray : normalStyle}>🤡{item.name}</h3>
+                            <Descriptions
+                                align="center"
+                                size="small"
+                                row
+                                data={[{ key: '分数', value: item.points }]}
+                            />
+                        </div>
+                    </List.Item>)
+                    } else {
+                        return(<List.Item style={style}>
+                        <div>
+                            <h3 style={isCalled ? getGray : normalStyle}>{item.name}</h3>
                             <Descriptions
                                 align="center"
                                 size="small"
@@ -62,9 +93,12 @@ function App() {
                             />
                         </div>
                     </List.Item>
-                )}
-            />
-            <Button 
+    )}
+                }
+                }
+                />
+    
+            <Button
             icon={<IconIdCard />}
             block onClick={showDialog}>开始点名</Button>
             <Modal
