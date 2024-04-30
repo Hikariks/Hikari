@@ -10,10 +10,10 @@ function App() {
     const{Text} = Typography
     const [calledStudents, setCalledStudents] = useState([]);
     const { data:students, error, isLoading } = useSWR('http://localhost:3000/students', url => axios.get(url).then(res => res.data))
+
     useEffect(() => {
         if (students && students.length === calledStudents.length) {
             setCalledStudents([]);
-
         }
     }, [calledStudents, students]);
     if(isLoading){
@@ -52,7 +52,6 @@ function App() {
     const getGray ={
         color: "gray",
         fontWeight: 500,
-        
     }
     return (
         <div>
@@ -69,10 +68,10 @@ function App() {
                 dataSource={students}
                 renderItem={item => {
                     const isCalled = calledStudents.includes(item.name)
-                    if (item.name==='赵胤轩') {                   
+                    if (item.points=== 0) {                   
                         return(<List.Item style={style}>
                         <div>
-                            <h3 style={isCalled ? getGray : normalStyle}>🤡{item.name}</h3>
+                            <Text heading={3} delete={isCalled?true:false}style={isCalled ? getGray : normalStyle}>🤡{item.name}</Text>
                             <Descriptions
                                 align="center"
                                 size="small"
@@ -84,7 +83,7 @@ function App() {
                     } else {
                         return(<List.Item style={style}>
                         <div>
-                            <h3 style={isCalled ? getGray : normalStyle}>{item.name}</h3>
+                            <Text heading={3} delete={isCalled?true:false} style={isCalled ? getGray : normalStyle}>{item.name}</Text>
                             <Descriptions
                                 align="center"
                                 size="small"
