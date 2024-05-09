@@ -1,13 +1,58 @@
 {
-    "students": [
-        { "name": "张恩淇", "points": 0 },
-        { "name": "王子浩然", "points": 0 },
-        { "name": "赵胤轩", "points": 0 },
-        { "name": "曾奕洲", "points": 0 },
-        { "name": "付子豪", "points": 0 },
-        { "name": "段啸俣", "points": 0 },
-        { "name": "高涵", "points": 0 },
-        { "name": "王子元", "points": 0 },
-        { "name": "吴廷潇", "points": 0 }
-    ]
-  }
+  "students": [
+    {
+      "name": "张恩淇",
+      "points": 3,
+      "id": "ccf6",
+      "selected": false
+    },
+    {
+      "name": "王子浩然",
+      "points": 3,
+      "id": "a7d8",
+      "selected": false
+    },
+    {
+      "name": "赵胤轩",
+      "points": 4,
+      "id": "c305",
+      "selected": false
+    },
+    {
+      "name": "曾奕洲",
+      "points": 5,
+      "id": "65ab",
+      "selected": false
+    },
+    {
+      "name": "付子豪",
+      "points": 5,
+      "id": "6fe4",
+      "selected": false
+    },
+    {
+      "name": "段啸俣",
+      "points": 3,
+      "id": "ba59",
+      "selected": false
+    },
+    {
+      "name": "高涵",
+      "points": 3,
+      "id": "48ff",
+      "selected": false
+    },
+    {
+      "name": "王子元",
+      "points": 4,
+      "id": "cf3d",
+      "selected": false
+    },
+    {
+      "name": "吴廷潇",
+      "points": 4,
+      "id": "144b",
+      "selected": false
+    }
+  ]
+}

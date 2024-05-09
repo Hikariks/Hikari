@@ -1,0 +1,42 @@
+.root{
+    :global {
+        background-color: #FFFFFF;
+        display: flex;
+        flex-direction: column;
+        }
+    .rest {
+        background-color: #FFFFFF;
+    }
+    .listblock{
+        background-color: #FFFFFF;
+        margin-top: 32px;
+        margin-bottom: 102px;
+    }
+    .people{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .button{
+        margin-top: 64px;
+        background-color: #FFFFFF;
+    }
+    .result{
+        display: inline-block;
+        padding: 20;
+        background-color: aqua;
+        border-radius: 10%;
+    }
+    .luckyboy{
+        margin-top: 10px;
+        margin-bottom: 5px;
+        border: 1px solid blue;
+        border-radius: 10%;
+
+    }
+    .totalresult{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
