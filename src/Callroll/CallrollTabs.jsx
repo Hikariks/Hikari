@@ -4,8 +4,10 @@ import { List, Button,Typography,Spin,Descriptions,InputNumber,Space,Card} from 
 import {IconUserGroup} from '@douyinfe/semi-icons'
 import axios from 'axios';
 import useSWR from 'swr'
+import {useParams} from 'react-router-dom'
 export const CallrollGroup =() => {
-  const { data:students, error, isLoading} = useSWR('http://localhost:4000/students', url => axios.get(url).then(res => res.data))
+  const params = useParams().courseId
+  const { data:students, error, isLoading} = useSWR(`http://localhost:4000/${params}`, url => axios.get(url).then(res => res.data))
   const{Text} = Typography
   const{Title} = Typography
   const [groups,setGroups] = useState([])

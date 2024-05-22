@@ -1,5 +1,12 @@
 {
-  "students": [
+  "Courses": [
+    {
+      "id": "ce4d",
+      "name": "COMP3902",
+      "course_id": "COMP3902"
+    }
+  ],
+  "COMP3902": [
     {
       "name": "张恩淇",
       "points": 3,
@@ -28,7 +35,7 @@
       "name": "付子豪",
       "points": 5,
       "id": "6fe4",
-      "selected": false
+      "selected": true
     },
     {
       "name": "段啸俣",

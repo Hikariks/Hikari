@@ -5,6 +5,7 @@ import Text from '@douyinfe/semi-ui/lib/es/typography/text';
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { Image } from '@douyinfe/semi-ui';
+import http from '../http';
 
 function App() {
   const [accountName, setAccountName] = useState()
@@ -12,7 +13,23 @@ function App() {
   const [isLoginDisabled, setIsLoginDisabled] = useState(true);
   const [loginError, setLoginError] = useState("");
   const navigate = useNavigate()
+  const [data, setData] = useState('');
   
+  useEffect(() => {
+    http.post('/teacher', {
+      user_name: '李真',
+      password: '114514'
+    })
+      .then(res => {
+        console.log(res.data.token)
+        localStorage.setItem('token', res.data.token)
+      })
+  }, []);
+
+  const test = () => {
+    http.get('/teacher').then(res => setData(res.data));
+  }
+
   function Login() {
     const state = Math.random();
     const check = new Promise((resolve, reject) => {
@@ -25,7 +42,7 @@ function App() {
     check
       .then(statevalue => {
         console.log(statevalue);
-        navigate("/callroll")
+        navigate("/courses")
         setLoginError("");
       })
       .catch(statevalue => {
@@ -59,7 +76,8 @@ function App() {
         >登陆</Button>
         <br></br>
         <Text className={styles.note}>如果还没有账号请点击这里注册</Text>
-        
+        <button onClick={test}>test</button>
+        {console.log(data)}
       </div>
       </div>
     
@@ -67,3 +85,4 @@ function App() {
 }
 
 export default App;
+
