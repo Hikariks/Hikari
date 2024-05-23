@@ -22,13 +22,14 @@ const App = () =>{
       element:<Courses></Courses>
     },
     {
+      path: '/course/:id',
+      element:<Course />
+    },
+    {
       path: '/callroll/:courseId',
       element:<Callroll />
     },
-    {
-      path: '/course/:id',
-      element:<Course />
-    }
+    
 
   ]);
 

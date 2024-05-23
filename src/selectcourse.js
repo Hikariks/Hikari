@@ -11,7 +11,6 @@ function App(){
   const [visible,setVisible] = useState(false)
   const [coursename, setCoursename] = useState()
   const [courseid,setCourseid] = useState()
-  const [deletename, setdeletename] = useState()
   const { data:courses, error, isLoading,mutate} = useSWR(`http://localhost:4000/Courses`, url => axios.get(url).then(res => res.data))
   if(isLoading){
     return <Spin></Spin>
@@ -99,7 +98,8 @@ if(error){
         dataSource={courses}
         renderItem={item => {   
           function go(){
-            navigate(`/callroll/${item.course_id}`)
+            // navigate(`/callroll/${item.course_id}`)
+            navigate(`/course/${item.id}`)
           }           
           return(<List.Item style={style}>
           <div>

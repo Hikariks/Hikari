@@ -13,7 +13,7 @@ function App() {
     const params = useParams().courseId
     const { data:students, error, isLoading, mutate } = useSWR(`http://localhost:4000/${params}`, url => axios.get(url).then(res => res.data))
     const navigate = useNavigate()
-
+    
     useEffect(() => {
         if (students && students.length === calledStudents.length) {
             setCalledStudents([]);
@@ -23,7 +23,7 @@ function App() {
     function back(){
         navigate("/courses")
     }
-
+    
     useEffect(()=>{
         if(students){
             const uncalledStudents = students.filter(dataItem => !dataItem.selected);
