@@ -1,15 +1,16 @@
-import {Button,Spin,List,Typography} from '@douyinfe/semi-ui';
+import {Button,Spin,List,Typography,SideSheet} from '@douyinfe/semi-ui';
 import useSWR from 'swr'
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
 import {useParams} from 'react-router-dom'
+import { useState } from 'react';
 
 
 function Course(){
   const {Text} = Typography
   const navigate = useNavigate()
   let { id } = useParams();
-  
+  const [visible, setVisible] = useState(false)
   const { data:course, error, isLoading } = useSWR(`http://localhost:4000/Courses/${id}`, url => axios.get(url).then(res => res.data))
   if(isLoading){
     return <Spin></Spin>
@@ -26,8 +27,15 @@ function Course(){
     paddingLeft: '20px',
   };
   
+  const showSheet =() =>{
+    setVisible(true)
+  }
   
-  
+  const change =() =>{
+    setVisible(!visible);
+  }
+
+
   return(
     <div>
       <div>{course.name}</div>
@@ -46,7 +54,9 @@ function Course(){
             }
             />
       <Button onClick={()=>{navigate(`/callroll/${course.course_id}`)}}>上课</Button>
-      <Button>考勤</Button>
+      <Button onClick={showSheet}>考勤</Button>
+      <SideSheet title="考勤" visible={visible} onCancel={change}>
+      </SideSheet>
       <Button>统计</Button>
     </div>
   )

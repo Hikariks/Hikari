@@ -2,7 +2,6 @@ import {useState,useEffect} from 'react';
 import axios from 'axios';
 import {Avatar,Spin, Tabs, TabPane, Button} from '@douyinfe/semi-ui';
 import useSWR from 'swr'
-import { updateStudent } from './updateStudent';
 import { CallrollTab } from './CallrollTab';
 import { CallrollGroup } from './CallrollTabs';
 import {IconArrowLeft} from '@douyinfe/semi-icons';
@@ -13,7 +12,7 @@ function App() {
     const params = useParams().courseId
     const { data:students, error, isLoading, mutate } = useSWR(`http://localhost:4000/${params}`, url => axios.get(url).then(res => res.data))
     const navigate = useNavigate()
-    
+    const updateStudent = ({ id, data }) => axios.patch(`http://localhost:4000/${params}/${id}`, data)
     useEffect(() => {
         if (students && students.length === calledStudents.length) {
             setCalledStudents([]);
@@ -23,7 +22,7 @@ function App() {
     function back(){
         navigate("/courses")
     }
-    
+
     useEffect(()=>{
         if(students){
             const uncalledStudents = students.filter(dataItem => !dataItem.selected);
@@ -39,7 +38,7 @@ function App() {
                   })
             }
         }
-    },[students,mutate])
+    })
 
     if(isLoading){
         return <Spin></Spin>

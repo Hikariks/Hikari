@@ -63,6 +63,9 @@ if(error){
     setCourseid()
     setVisible(false)
   }
+
+
+
   const style = {
     border: '1px solid var(--semi-color-border)',
     backgroundColor: 'var(--semi-color-bg-2)',
@@ -98,7 +101,6 @@ if(error){
         dataSource={courses}
         renderItem={item => {   
           function go(){
-            // navigate(`/callroll/${item.course_id}`)
             navigate(`/course/${item.id}`)
           }           
           return(<List.Item style={style}>
