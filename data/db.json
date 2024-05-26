@@ -4,60 +4,70 @@
       "id": "ce4d",
       "name": "JavaScript Project",
       "course_id": "COMP3902",
+      "course_time": "2020-02-20 上午",
       "student": [
         {
           "name": "张恩淇",
           "points": 3,
           "id": "ccf6",
-          "selected": false
+          "selected": false,
+          "status": "请假"
         },
         {
           "name": "王子浩然",
           "points": 3,
           "id": "a7d8",
-          "selected": false
+          "selected": false,
+          "status": "正常"
         },
         {
           "name": "赵胤轩",
           "points": 4,
           "id": "c305",
-          "selected": false
+          "selected": false,
+          "status": "正常"
         },
         {
           "name": "曾奕洲",
           "points": 5,
           "id": "65ab",
-          "selected": false
+          "selected": false,
+          "status": "正常"
         },
         {
           "name": "付子豪",
           "points": 5,
           "id": "6fe4",
-          "selected": true
+          "selected": true,
+          "status": "正常"
         },
         {
           "name": "段啸俣",
           "points": 3,
           "id": "ba59",
-          "selected": false
+          "selected": false,
+          "status": "正常"
         },
         {
           "name": "高涵",
           "points": 3,
           "id": "48ff",
-          "selected": false
+          "selected": false,
+          "status": "正常"
         },
         {
           "name": "王子元",
           "points": 4,
           "id": "cf3d",
-          "selected": false
+          "selected": false,
+          "status": "正常"
         },
         {
           "name": "吴廷潇",
           "points": 4,
           "id": "144b",
-          "selected": false
+          "selected": false,
+          "status": "正常"
         }
       ]
     }

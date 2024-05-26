@@ -71,69 +71,69 @@ export const CallrollTab =() =>{
       <div>
         <Text>分数最高：👑  分数最低：🤡  </Text>
         <List
-                    grid={{
-                        gutter: 20,
-                        span: 8,
-                    }}
-                    dataSource={students}
-                    renderItem={item => {
-                        const isCalled = calledStudents.includes(item.name)
-                        if (item.points === highestScore) {                   
-                            return(<List.Item style={style}>
-                            <div>
-                                <Text heading={3} delete={isCalled?true:false}style={isCalled ? getGray : normalStyle}>👑{item.name}</Text>
-                                <Descriptions
-                                    align="center"
-                                    size="small"
-                                    row
-                                    data={[{ key: '分数', value: item.points }]}
-                                />
-                            </div>
-                        </List.Item>)
-                        }
-                        if (item.points === lowestScore) {                   
-                          return(<List.Item style={style}>
-                          <div>
-                              <Text heading={3} delete={isCalled?true:false}style={isCalled ? getGray : normalStyle}>🤡{item.name}</Text>
-                              <Descriptions
-                                  align="center"
-                                  size="small"
-                                  row
-                                  data={[{ key: '分数', value: item.points }]}
-                              />
-                          </div>
-                      </List.Item>)
-                      }
-                     else {
-                          return(<List.Item style={style}>
-                            <div>
-                                <Text heading={3} delete={isCalled?true:false} style={isCalled ? getGray : normalStyle}>{item.name}</Text>
-                                <Descriptions
-                                    align="center"
-                                    size="small"
-                                    row
-                                    data={[{ key: '分数', value:item.points }]}
-                                />
-                            </div>
-                        </List.Item>
-        )}
-                    }
-                    }
-                    />
-                    <Button
-                    icon={<IconUser />}
-                    block onClick={showDialog}>开始点名</Button>
-                    <Modal
-                    title="幸运儿"
-                    visible={visible}
-                    onOk={handleOk}
-                    onCancel={handleCancel}
-                    closeOnEsc={true}
-                    okText={'答对了，加一分'}
-                    cancelText={'答错了，不加分'}    
-                >
-                <Text type='danger'>{selectedStudent.name}</Text>
-                </Modal>
+              grid={{
+                  gutter: 20,
+                  span: 8,
+              }}
+              dataSource={students}
+              renderItem={item => {
+                  const isCalled = calledStudents.includes(item.name)
+                  if (item.points === highestScore) {                   
+                      return(<List.Item style={style}>
+                      <div>
+                          <Text heading={3} delete={isCalled?true:false}style={isCalled ? getGray : normalStyle}>👑{item.name}</Text>
+                          <Descriptions
+                              align="center"
+                              size="small"
+                              row
+                              data={[{ key: '分数', value: item.points }]}
+                          />
+                      </div>
+                  </List.Item>)
+                  }
+                  if (item.points === lowestScore) {                   
+                    return(<List.Item style={style}>
+                    <div>
+                        <Text heading={3} delete={isCalled?true:false}style={isCalled ? getGray : normalStyle}>🤡{item.name}</Text>
+                        <Descriptions
+                            align="center"
+                            size="small"
+                            row
+                            data={[{ key: '分数', value: item.points }]}
+                        />
+                    </div>
+                </List.Item>)
+                }
+                else {
+                    return(<List.Item style={style}>
+                      <div>
+                          <Text heading={3} delete={isCalled?true:false} style={isCalled ? getGray : normalStyle}>{item.name}</Text>
+                          <Descriptions
+                              align="center"
+                              size="small"
+                              row
+                              data={[{ key: '分数', value:item.points }]}
+                          />
+                      </div>
+                  </List.Item>
+  )}
+              }
+              }
+              />
+              <Button
+              icon={<IconUser />}
+              block onClick={showDialog}>开始点名</Button>
+              <Modal
+              title="幸运儿"
+              visible={visible}
+              onOk={handleOk}
+              onCancel={handleCancel}
+              closeOnEsc={true}
+              okText={'答对了，加一分'}
+              cancelText={'答错了，不加分'}    
+          >
+          <Text type='danger'>{selectedStudent.name}</Text>
+          </Modal>
       </div>   
     )
   }
