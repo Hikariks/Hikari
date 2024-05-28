@@ -20,7 +20,7 @@ function App() {
     }, [calledStudents, students]);
     
     function back(){
-        navigate(`/courses/`)
+        navigate(`/course/${params}`)
     }
 
     useEffect(()=>{

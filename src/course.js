@@ -1,4 +1,4 @@
-import { Button, Spin, List, Typography, Modal, Radio, Input, SideSheet } from '@douyinfe/semi-ui';
+import { Button, Spin, List, Typography, Modal, Radio, Input, SideSheet, Table } from '@douyinfe/semi-ui';
 import useSWR from 'swr';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -8,12 +8,12 @@ import { useState } from 'react';
 function Course() {
   const { Text } = Typography;
   const navigate = useNavigate();
-  let { id } = useParams();
+  const params = useParams().courseId;
   const [sideSheetVisible, setSideSheetVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [attendance, setAttendance] = useState({});
-  const [nonNormalStudents, setNonNormalStudents] = useState([]);
-  const { data: course, error, isLoading, mutate } = useSWR(`http://localhost:4000/Courses/${id}`, url => axios.get(url).then(res => res.data));
+  const { data: course, error, isLoading, mutate } = useSWR(`http://localhost:4000/Courses/${params}`, url => axios.get(url).then(res => res.data));
+  const { data: attendances, mutate: mutateAttendances } = useSWR(`http://localhost:4000/Attendance`, url => axios.get(url).then(res => res.data));
 
   if (isLoading) {
     return <Spin></Spin>;
@@ -31,8 +31,6 @@ function Course() {
   };
 
   const showSheet = () => {
-    const nonNormal = course.student.filter(student => student.status !== '正常');
-    setNonNormalStudents(nonNormal);
     setSideSheetVisible(true);
   };
 
@@ -40,25 +38,79 @@ function Course() {
     setModalVisible(true);
   };
 
+  const columns = [
+    {
+      title: '日期',
+      dataIndex: 'time',
+    },
+    {
+      title: '详情',
+      dataIndex: 'size',
+      render: (text, record) => {
+        return (
+          record.detail.map(x => Object.entries(x).map(y => y))
+        );
+      },
+    },
+  ];
+
   const handleOk = async () => {
-    try {
-      const updatedStudents = course.student.map(student => ({
-        ...student,
-        status: attendance[student.id]?.status || student.status
+    const currentDate = new Date();
+    const yourDate = currentDate.toLocaleDateString('zh-CN');
+    const period = currentDate.getHours() >= 12 ? '下午' : '上午';
+    const currentTime = `${yourDate}${period}`;
+    const detail = course.student
+      .filter(student => attendance[student.id]?.status && attendance[student.id]?.status !== '正常')
+      .map(student => ({
+        [student.name]: attendance[student.id]?.status
       }));
 
-      await axios.put(`http://localhost:4000/Courses/${id}`, {
-        ...course,
-        student: updatedStudents
-      });
-
+    if (attendances.time != currentTime) {
+      await fetch('http://localhost:4000/Attendance', 
+    {
+      method: 'POST', // 请求方法
+      headers: {
+        'Content-Type': 'application/json', // 设置内容类型
+      },
+      body: JSON.stringify({
+        time: currentTime,
+        detail: detail
+      }),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       mutate();
-    } catch (error) {
-      console.error('更新考勤状态失败', error);
-    } finally {
-      setModalVisible(false);
-      setSideSheetVisible(false);
+    });
+    await mutateAttendances(); 
+    }else{
+      await fetch(`http://localhost:4000/Attendance${attendances.id}`, 
+    {
+      method: 'PUT', // 请求方法
+      headers: {
+        'Content-Type': 'application/json', // 设置内容类型
+      },
+      body: JSON.stringify({
+        time: currentTime,
+        detail: detail
+      }),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      mutate();
+    });
+    await mutateAttendances(); 
     }
+    
+
+    
+
+    setModalVisible(false);
+    setSideSheetVisible(true);
+    setAttendance([])
   };
 
   const handleCancel = () => {
@@ -78,6 +130,8 @@ function Course() {
       }
     }));
   };
+
+  
 
   return (
     <div>
@@ -103,14 +157,7 @@ function Course() {
       <SideSheet title="考勤" visible={sideSheetVisible} onCancel={handleSheetCancel} closeOnEsc={true}>
         <Button onClick={showAttendanceModal}>添加考勤</Button>
         <br></br>
-        <Text>{course.course_time}</Text>
-        <div>
-          {nonNormalStudents.map(student => (
-            <div key={student.id}>
-              <Text>{student.name}: {student.status}</Text>
-            </div>
-          ))}
-        </div>
+        <Table columns={columns} dataSource={attendances} pagination={false} />
       </SideSheet>
       <Modal
         title="添加考勤"

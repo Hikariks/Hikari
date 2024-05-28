@@ -22,7 +22,7 @@ const App = () =>{
       element:<Courses></Courses>
     },
     {
-      path: '/course/:id',
+      path: '/course/:courseId',
       element:<Course />
     },
     {
