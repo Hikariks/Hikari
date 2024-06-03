@@ -13,43 +13,29 @@ function App() {
   const [isLoginDisabled, setIsLoginDisabled] = useState(true);
   const [loginError, setLoginError] = useState("");
   const navigate = useNavigate()
-  const [data, setData] = useState('');
-  
-  useEffect(() => {
-    http.post('/teacher', {
-      user_name: '李真',
-      password: '114514'
-    })
-      .then(res => {
-        console.log(res.data.token)
-        localStorage.setItem('token', res.data.token)
-      })
-  }, []);
 
-  const test = () => {
-    http.get('/teacher').then(res => setData(res.data));
-  }
 
-  function Login() {
-    const state = Math.random();
-    const check = new Promise((resolve, reject) => {
-      if (state > 0.5) {
-        resolve('登陆成功')
-      } else {
-        reject('登陆失败，重新输入密码吧')
-      }
-    })
-    check
-      .then(statevalue => {
-        console.log(statevalue);
-        navigate("/courses")
-        setLoginError("");
-      })
-      .catch(statevalue => {
-        console.log(statevalue);
-        setLoginError(statevalue);
-      })
-  }
+  function isSucceed() {
+    new Promise(() => {
+      http
+        .post('/teacher', {
+          user_name: accountName,
+          password: accountKey,
+        })
+        .then(res => {
+          if (res.data.token) {
+            localStorage.setItem('token', res.data.token);
+            console.log(res.data.token);
+            navigate('/courses');
+            setLoginError("")
+          }else{
+            setLoginError("密码或账号错误")
+          }
+        })
+        .catch(statevalue => {
+          setLoginError(statevalue);
+     });
+})}
 
   useEffect(() => {
     setIsLoginDisabled(!accountName || !accountKey);
@@ -67,17 +53,15 @@ function App() {
       <div className={styles.cont_contain}>
         <Title className={styles.title}>欢迎登录教师点名系统</Title>
         <Input className={styles.input_acc}
-        autoFocus placeholder='请输入账户' size='large' value={accountName} onChange={(changeValue) => { setAccountName(changeValue); console.log(accountName) }}></Input>
-        <Input className={styles.input_key} placeholder='请输入密码' size='large' value={accountKey} onChange={(changeValue) => { setAccountKey(changeValue); console.log(accountKey); }}></Input>
+        autoFocus placeholder='请输入账户' size='large' value={accountName} onChange={(changeValue) => { setAccountName(changeValue)}}></Input>
+        <Input className={styles.input_key} placeholder='请输入密码' size='large' value={accountKey} onChange={(changeValue) => { setAccountKey(changeValue) }}></Input>
         {loginError && <Text className={styles.error} style={{color:'red'}}>{loginError}</Text>}
         <Button
           className={styles.button}
-          onClick={Login} disabled={isLoginDisabled}
+          onClick={isSucceed} disabled={isLoginDisabled}
         >登陆</Button>
         <br></br>
         <Text className={styles.note}>如果还没有账号请点击这里注册</Text>
-        <button onClick={test}>test</button>
-        {console.log(data)}
       </div>
       </div>
     

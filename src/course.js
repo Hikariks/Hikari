@@ -1,9 +1,9 @@
 import { Button, Spin, List, Typography, Modal, Radio, Input, SideSheet, Table } from '@douyinfe/semi-ui';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 function Course() {
   const { Text } = Typography;
@@ -12,11 +12,65 @@ function Course() {
   const [sideSheetVisible, setSideSheetVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [attendance, setAttendance] = useState({});
-  const { data: course, error, isLoading, mutate } = useSWR(`http://localhost:4000/Courses/${params}`, url => axios.get(url).then(res => res.data));
-  const { data: attendances, mutate: mutateAttendances } = useSWR(`http://localhost:4000/Attendance`, url => axios.get(url).then(res => res.data));
+  const [scoreVisible, setScoreVisible] = useState(false);
+
+  const { data: course, error, isLoading } = useSWR(`http://localhost:4000/Courses/${params}`, url => axios.get(url).then(res => res.data));
+  const { data: attendances, mutate:mutateAttendances } = useSWR(`http://localhost:4000/Attendance`, url => axios.get(url).then(res => res.data));
+  const { data: scores } = useSWR(`http://localhost:4000/Score`, url => axios.get(url).then(res => res.data));
+
+  const transformedScores = useMemo(() => {
+    if (!scores) return { dates: [], transformedData: [] };
+    const dates = [...new Set(scores.map(score => score.time))];
+    const studentMap = {};
+    scores.forEach(score => {
+      score.detail.forEach(detail => {
+        if (!studentMap[detail.name]) {
+          studentMap[detail.name] = { name: detail.name, id: detail.id };
+        }
+        studentMap[detail.name][score.time] = detail.points;
+      });
+    });
+    const transformedData = Object.values(studentMap).map(student => {
+      const scoreChange = dates.length >= 2 ? (student[dates[1]] || 0) - (student[dates[0]] || 0) : 0;
+      return { ...student, scoreChange };
+    });
+
+    return { dates, transformedData };
+  }, [scores]);
+
+  const scoreColumns = useMemo(() => {
+    if (!transformedScores.dates.length) return [];
+
+    const dateColumns = transformedScores.dates.map(date => ({
+      title: date,
+      dataIndex: date,
+      width: 100,
+    }));
+
+    return [
+      {
+        title: '学生',
+        dataIndex: 'name',
+        fixed: 'left',
+        width: 75,
+      },
+      ...dateColumns,
+      {
+        title: '分数变化',
+        dataIndex: 'scoreChange',
+        fixed: 'right',
+        width: 60,
+        render: (text, record) => (
+          <Text style={{ color: record.scoreChange >= 0 ? 'green' : 'red' }}>
+            {record.scoreChange >= 0 ? `+${record.scoreChange}` : record.scoreChange}
+          </Text>
+        ),
+      },
+    ];
+  }, [transformedScores.dates]);
 
   if (isLoading) {
-    return <Spin></Spin>;
+    return <Spin />;
   }
 
   if (error) {
@@ -59,21 +113,20 @@ function Course() {
     const yourDate = currentDate.toLocaleDateString('zh-CN');
     const period = currentDate.getHours() >= 12 ? '下午' : '上午';
     const currentTime = `${yourDate}${period}`;
+    const existingAttendance = attendances.find(att => att.time === currentTime);
     const detail = course.student
       .filter(student => attendance[student.id]?.status && attendance[student.id]?.status !== '正常')
       .map(student => ({
         [student.name]: attendance[student.id]?.status
       }));
-
-    if (attendances.time != currentTime) {
-      await fetch('http://localhost:4000/Attendance', 
+    if(existingAttendance){
+    await fetch(`http://localhost:4000/Attendance/${existingAttendance.id}`, 
     {
-      method: 'POST', // 请求方法
+      method: 'PATCH', // 请求方法
       headers: {
         'Content-Type': 'application/json', // 设置内容类型
       },
       body: JSON.stringify({
-        time: currentTime,
         detail: detail
       }),
     })
@@ -82,36 +135,29 @@ function Course() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       mutate();
-    });
-    await mutateAttendances(); 
-    }else{
-      await fetch(`http://localhost:4000/Attendance${attendances.id}`, 
-    {
-      method: 'PUT', // 请求方法
-      headers: {
-        'Content-Type': 'application/json', // 设置内容类型
-      },
-      body: JSON.stringify({
-        time: currentTime,
-        detail: detail
-      }),
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      mutate();
-    });
-    await mutateAttendances(); 
+    });}else{
+      await fetch(`http://localhost:4000/Attendance`, 
+      {
+        method: 'POST', // 请求方法
+        headers: {
+          'Content-Type': 'application/json', // 设置内容类型
+        },
+        body: JSON.stringify({
+          time: currentTime,
+          detail: detail
+        }),
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        mutate();
+      })
     }
-    
-
-    
-
+    await mutateAttendances(); 
     setModalVisible(false);
     setSideSheetVisible(true);
-    setAttendance([])
-  };
+  }
 
   const handleCancel = () => {
     setModalVisible(false);
@@ -131,7 +177,9 @@ function Course() {
     }));
   };
 
-  
+  const handleScoreCancel = () => {
+    setScoreVisible(false);
+  };
 
   return (
     <div>
@@ -190,7 +238,10 @@ function Course() {
           )}
         />
       </Modal>
-      <Button>统计</Button>
+      <Button onClick={() => setScoreVisible(true)}>统计</Button>
+      <SideSheet title="统计" visible={scoreVisible} onCancel={handleScoreCancel} closeOnEsc={true}>
+        <Table columns={scoreColumns} dataSource={transformedScores.transformedData} pagination={false} scroll={{ x: '100%' }} />
+      </SideSheet>
     </div>
   );
 }

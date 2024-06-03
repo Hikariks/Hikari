@@ -92,94 +92,43 @@
       ]
     },
     {
-      "id": "6751",
-      "time": "2024/5/28上午",
+      "id": "822d",
+      "time": "2024/5/30上午",
       "detail": [
         {
           "王子浩然": "请假"
+        }
+      ]
+    },
+    {
+      "id": "65f6",
+      "time": "2024/5/30上午",
+      "detail": [
+        {
+          "段啸俣": "请假"
+        }
+      ]
+    },
+    {
+      "time": "2024/6/3下午",
+      "detail": [
+        {
+          "付子豪": "缺席"
         },
         {
-          "付子豪": "请假"
+          "高涵": "请假"
         },
         {
           "王子元": "请假"
         }
-      ]
-    },
-    {
-      "id": "3f22",
-      "time": "2024/5/28上午",
-      "detail": [
-        {
-          "曾奕洲": "请假"
-        }
-      ]
-    },
-    {
-      "id": "64bb",
-      "time": "2024/5/28上午",
-      "detail": [
-        {
-          "王子浩然": "请假"
-        }
-      ]
-    },
-    {
-      "id": "05af",
-      "time": "2024/5/28上午",
-      "detail": [
-        {
-          "赵胤轩": "迟到"
-        }
-      ]
-    },
-    {
-      "id": "6601",
-      "time": "2024/5/28上午",
-      "detail": [
-        {
-          "张恩淇": "请假"
-        }
-      ]
-    },
-    {
-      "id": "ddfe",
-      "time": "2024/5/28上午",
-      "detail": [
-        {
-          "王子浩然": "请假"
-        }
-      ]
-    },
-    {
-      "id": "c50f",
-      "time": "2024/5/28上午",
-      "detail": [
-        {
-          "王子元": "迟到"
-        },
-        {
-          "吴廷潇": "迟到"
-        }
-      ]
-    },
-    {
-      "id": "7bd2",
-      "time": "2024/5/28上午",
-      "detail": [
-        {
-          "张恩淇": "请假"
-        },
-        {
-          "王子浩然": "请假"
-        }
-      ]
+      ],
+      "id": "63ec"
     }
   ],
-  "Score":[
+  "Score": [
     {
       "time": "2024/5/28上午",
-      "detail":[
+      "detail": [
         {
           "name": "张恩淇",
           "points": 4,
@@ -224,11 +173,12 @@
           "name": "吴廷潇",
           "points": 6,
           "id": "144b"
-        }]
+        }
+      ]
     },
     {
       "time": "2024/5/29上午",
-      "detail":[
+      "detail": [
         {
           "name": "张恩淇",
           "points": 5,
@@ -273,7 +223,8 @@
           "name": "吴廷潇",
           "points": 9,
           "id": "144b"
-        }]
+        }
+      ]
     }
   ],
   "COMP3902": [
@@ -281,7 +232,7 @@
       "name": "张恩淇",
       "points": 4,
       "id": "ccf6",
-      "selected": true
+      "selected": false
     },
     {
       "name": "王子浩然",
@@ -293,13 +244,13 @@
       "name": "赵胤轩",
       "points": 4,
       "id": "c305",
-      "selected": true
+      "selected": false
     },
     {
       "name": "曾奕洲",
       "points": 6,
       "id": "65ab",
-      "selected": true
+      "selected": false
     },
     {
       "name": "付子豪",
@@ -311,25 +262,25 @@
       "name": "段啸俣",
       "points": 5,
       "id": "ba59",
-      "selected": true
+      "selected": false
     },
     {
       "name": "高涵",
       "points": 6,
       "id": "48ff",
-      "selected": true
+      "selected": false
     },
     {
       "name": "王子元",
       "points": 6,
       "id": "cf3d",
-      "selected": true
+      "selected": false
     },
     {
       "name": "吴廷潇",
       "points": 6,
       "id": "144b",
-      "selected": true
+      "selected": false
     }
   ]
 }

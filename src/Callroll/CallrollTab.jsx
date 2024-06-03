@@ -4,12 +4,14 @@ import {IconUser} from '@douyinfe/semi-icons'
 import axios from 'axios';
 import useSWR from 'swr'
 import {useParams} from 'react-router-dom'
+import {IconDelete} from '@douyinfe/semi-icons';
 
 export const CallrollTab =() =>{
   const params = useParams().courseId
   const { data:students, error, isLoading,mutate } = useSWR(`http://localhost:4000/${params}`, url => axios.get(url).then(res => res.data))
   const [selectedStudent, setSelectedStudent] = useState({}); 
   const [visible, setVisible] = useState(false);
+  const [warning, setWarning] = useState(false);
   const [calledStudents, setCalledStudents] = useState([]);
   const{Text} = Typography
   const updateStudent = ({ id, data }) => axios.patch(`http://localhost:4000/${params}/${id}`, data)
@@ -65,6 +67,27 @@ export const CallrollTab =() =>{
     fontWeight: 500,
   }
 
+  const showWarning =() => {
+    setWarning(true)
+  }
+
+  const deletestudent = (id) => {
+    fetch(`http://localhost:4000/${params}/${id}`, {
+      method: 'DELETE',
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        mutate();
+      });
+    setWarning(false)
+  };
+
+  const warningcancel = () => {
+    setWarning(false)
+  }
+
   
 
     return(
@@ -88,6 +111,16 @@ export const CallrollTab =() =>{
                               row
                               data={[{ key: '分数', value: item.points }]}
                           />
+                          <Button
+                          icon={<IconDelete/>}
+                          onClick={showWarning}></Button>
+                          <Modal
+                          title="警告"
+                          visible={warning}
+                          onOk={() => deletestudent(item.id)}
+                          onCancel={warningcancel}
+                          ><Text>确定删除该学生吗</Text>
+                          </Modal>
                       </div>
                   </List.Item>)
                   }
@@ -101,6 +134,16 @@ export const CallrollTab =() =>{
                             row
                             data={[{ key: '分数', value: item.points }]}
                         />
+                        <Button
+                          icon={<IconDelete/>}
+                          onClick={showWarning}></Button>
+                          <Modal
+                          title="警告"
+                          visible={warning}
+                          onOk={() => deletestudent(item.id)}
+                          onCancel={warningcancel}
+                          ><Text>确定删除该学生吗</Text>
+                          </Modal>
                     </div>
                 </List.Item>)
                 }
@@ -114,6 +157,16 @@ export const CallrollTab =() =>{
                               row
                               data={[{ key: '分数', value:item.points }]}
                           />
+                           <Button
+                          icon={<IconDelete/>}
+                          onClick={showWarning}></Button>
+                          <Modal
+                          title="警告"
+                          visible={warning}
+                          onOk={() => deletestudent(item.id)}
+                          onCancel={warningcancel}
+                          ><Text>确定删除该学生吗</Text>
+                          </Modal>
                       </div>
                   </List.Item>
   )}
