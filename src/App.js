@@ -5,8 +5,8 @@ import {
 } from "react-router-dom";
 import Login from './Login/index'
 import Callroll from './Callroll/callroll'
-import Courses from './selectcourse'
-import Course from './course'
+import Courses from './Selectcourse/selectcourse'
+import Course from './Course/course'
 const App = () =>{
   const router = createBrowserRouter([
     {

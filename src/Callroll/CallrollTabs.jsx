@@ -64,7 +64,6 @@ if(error){
     <div className={styles.root}>
       <div className={styles.listblock}>
         <List
-            
             grid={{
                 gutter: 20,
                 span: 8,
@@ -85,7 +84,7 @@ if(error){
             />
       </div>
       <div className={styles.rest}>
-        <Title strong heading={1} className={styles.people}>每组分成<InputNumber min={2} max={6} defaultValue={2} value={groupSize} onChange={(changeValue) => { setGroupSize(changeValue)}}/>人</Title>
+        <Title strong heading={1} className={styles.people}>每组分成<InputNumber min={2} max={5} defaultValue={2} value={groupSize} onChange={(changeValue) => { setGroupSize(changeValue)}}/>人</Title>
           <Button
           className={styles.button}
           icon={<IconUserGroup />}

@@ -1,0 +1,185 @@
+.root {
+    position: relative;
+
+    .cardlist {
+        display: flex;
+        gap: 200px;
+        justify-content: center;
+        align-items: center;
+        margin-top: 40px;
+    }
+
+    .logoclass {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 52px;
+    }
+
+    .cardclass {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        height: 300px;
+        padding: 12px;
+        flex-shrink: 0;
+        border-radius: var(--radius-popover, 6px);
+        background: var(--color-banner_warning-bg-default, #FFF8EA);
+        box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.30), 0px 4px 14px 0px rgba(0, 0, 0, 0.10);
+    }
+
+    .textclass {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 10px;
+        color: var(--palette-amber---semi-amber-8, #784606);
+    }
+
+    .buttonclass {
+        border-radius: var(----semi-border-radius-full, 9999px);
+        border: 0px solid var(--color-button_primary-border-default, rgba(0, 0, 0, 0.00));
+        background: var(--usage-data---semi-color-data-2, #F58700);
+        color: var(--color-button_primary-text-default, #FFF);
+        display: flex;
+        width: 168px;
+        height: var(--height-button_default, 48px);
+        padding: var(--spacing-button_default-paddingTop, 6px) var(--spacing-button_default-paddingRight, 12px) var(--spacing-button_default-paddingTop, 6px) var(--spacing-button_default-paddingLeft, 12px);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .containerclass {
+        display: flex;
+        justify-content: space-between;
+        gap: 36px;
+    }
+
+    .logoattendance {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 52px;
+    }
+
+    .cardattendance {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        height: 300px;
+        padding: 12px;
+        flex-shrink: 0;
+        border-radius: var(--radius-popover, 6px);
+        background: var(--color-banner_info-bg-default, #EAF5FF);
+        box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.30), 0px 4px 14px 0px rgba(0, 0, 0, 0.10);
+    }
+
+    .textattendance {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 10px;
+        color: var(--palette-cyan---semi-cyan-7, hsl(188, 98%, 24%));
+    }
+
+    .buttonattendance {
+        border-radius: var(----semi-border-radius-full, 9999px);
+        border: 0px solid var(--color-button_primary-border-default, rgba(0, 0, 0, 0.00));
+        background: var(--usage-data---semi-color-data-10, #30A7CE);
+        color: var(--color-button_primary-text-default, #FFF);
+        display: flex;
+        width: 168px;
+        height: var(--height-button_default, 48px);
+        padding: var(--spacing-button_default-paddingTop, 6px) var(--spacing-button_default-paddingRight, 12px) var(--spacing-button_default-paddingTop, 6px) var(--spacing-button_default-paddingLeft, 12px);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .containerattendance {
+        display: flex;
+        justify-content: space-between;
+        gap: 36px;
+    }
+
+    .logostatic {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 52px;
+    }
+
+    .cardstatic {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        height: 300px;
+        padding: 12px;
+        flex-shrink: 0;
+        border-radius: var(--radius-popover, 6px);
+        background: var(--color-banner_success-bg-default, #ECF7EC);
+        box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.30), 0px 4px 14px 0px rgba(0, 0, 0, 0.10);
+    }
+
+    .textstatic {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 10px;
+        color: var(--palette-yellow---semi-yellow-8, #7D6A00);
+    }
+
+    .buttonstatic {
+        border-radius: var(----semi-border-radius-full, 9999px);
+        border: 0px solid var(--color-button_primary-border-default, rgba(0, 0, 0, 0.00));
+        background: var(--usage-data---semi-color-data-8, #83B023);
+        color: var(--color-button_primary-text-default, #FFF);
+        display: flex;
+        width: 168px;
+        height: var(--height-button_default, 48px);
+        padding: var(--spacing-button_default-paddingTop, 6px) var(--spacing-button_default-paddingRight, 12px) var(--spacing-button_default-paddingTop, 6px) var(--spacing-button_default-paddingLeft, 12px);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .containerstatic {
+        display: flex;
+        justify-content: space-between;
+        gap: 36px;
+    }
+
+    .logo{
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        z-index: -999;
+      }  
+    
+    .intro{
+        margin-top: 50px;
+    }
+
+    .list{
+        margin-top: 15px;
+    }
+
+    .studentlist{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin-left: 60px;
+    margin-bottom: 20px;
+    background: rgba(var(--semi-grey-1), 0.15);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3px);
+    border: 1px solid var(--semi-color-border);
+    width: 100px;
+    height: 50px;
+    }
+}

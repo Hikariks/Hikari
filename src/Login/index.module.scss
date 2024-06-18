@@ -84,9 +84,20 @@
       flex-shrink: 0;
     }
     .note{
+      margin-top: 30px;
       display: flex;
       justify-content: center;
       margin-bottom: 119px;
   }
+
+    .error{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loginbutton{
+      background-color: #FFFFFF;
+    }
 }
 }

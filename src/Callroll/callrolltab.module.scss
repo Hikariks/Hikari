@@ -1,0 +1,12 @@
+.root{
+    .list{
+        .studentsList{
+            border-radius: 10px;
+            margin: 10px 2px;
+            background: rgba(var(--semi-grey-1), 0.15);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(3px);
+            border: 1px solid var(--semi-color-border);
+        }
+    }
+  }

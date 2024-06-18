@@ -1,7 +1,63 @@
 {
+  "3": [
+    {
+      "name": "张恩淇",
+      "points": 0,
+      "id": "ccf6",
+      "selected": false
+    },
+    {
+      "name": "王子浩然",
+      "points": 5,
+      "id": "a7d8",
+      "selected": false
+    },
+    {
+      "name": "赵胤轩",
+      "points": 0,
+      "id": "c305",
+      "selected": false
+    },
+    {
+      "name": "曾奕洲",
+      "points": 1,
+      "id": "65ab",
+      "selected": false
+    },
+    {
+      "name": "付子豪",
+      "points": 0,
+      "id": "6fe4",
+      "selected": false
+    },
+    {
+      "name": "段啸俣",
+      "points": 0,
+      "id": "ba59",
+      "selected": false
+    },
+    {
+      "name": "高涵",
+      "points": 0,
+      "id": "48ff",
+      "selected": false
+    },
+    {
+      "name": "王子元",
+      "points": 10,
+      "id": "cf3d",
+      "selected": false
+    },
+    {
+      "name": "吴廷潇",
+      "points": 0,
+      "id": "144b",
+      "selected": true
+    }
+  ],
   "Courses": [
     {
-      "id": "COMP3902",
+      "id": "3",
       "name": "JavaScript Project",
       "course_id": "COMP3902",
       "course_time": "2020-02-20 上午",
@@ -113,16 +169,55 @@
       "time": "2024/6/3下午",
       "detail": [
         {
-          "付子豪": "缺席"
-        },
-        {
-          "高涵": "请假"
-        },
-        {
-          "王子元": "请假"
+          "赵胤轩": "请假"
         }
       ],
       "id": "63ec"
+    },
+    {
+      "id": "8418",
+      "time": "2024/6/4下午",
+      "detail": [
+        {
+          "张恩淇": "请假"
+        },
+        {
+          "王子浩然": "请假"
+        }
+      ]
+    },
+    {
+      "id": "5604",
+      "time": "2024/6/11上午",
+      "detail": [
+        {
+          "张恩淇": "迟到"
+        }
+      ]
+    },
+    {
+      "id": "16a3",
+      "time": "2024/6/13下午",
+      "detail": [
+        {
+          "赵胤轩": "缺席"
+        },
+        {
+          "付子豪": "请假"
+        }
+      ]
+    },
+    {
+      "id": "a880",
+      "time": "2024/6/17下午",
+      "detail": [
+        {
+          "付子豪": "请假"
+        },
+        {
+          "高涵": "迟到"
+        }
+      ]
     }
   ],
   "Score": [
@@ -225,62 +320,6 @@
           "id": "144b"
         }
       ]
-    }
-  ],
-  "COMP3902": [
-    {
-      "name": "张恩淇",
-      "points": 4,
-      "id": "ccf6",
-      "selected": false
-    },
-    {
-      "name": "王子浩然",
-      "points": 3,
-      "id": "a7d8",
-      "selected": false
-    },
-    {
-      "name": "赵胤轩",
-      "points": 4,
-      "id": "c305",
-      "selected": false
-    },
-    {
-      "name": "曾奕洲",
-      "points": 6,
-      "id": "65ab",
-      "selected": false
-    },
-    {
-      "name": "付子豪",
-      "points": 6,
-      "id": "6fe4",
-      "selected": true
-    },
-    {
-      "name": "段啸俣",
-      "points": 5,
-      "id": "ba59",
-      "selected": false
-    },
-    {
-      "name": "高涵",
-      "points": 6,
-      "id": "48ff",
-      "selected": false
-    },
-    {
-      "name": "王子元",
-      "points": 6,
-      "id": "cf3d",
-      "selected": false
-    },
-    {
-      "name": "吴廷潇",
-      "points": 6,
-      "id": "144b",
-      "selected": false
     }
   ]
 }
